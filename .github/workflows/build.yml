@@ -9,16 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: windows-latest
-            artifact: print-agent-win.exe
-          - os: ubuntu-latest
-            artifact: print-agent-linux
-          - os: macos-latest
-            artifact: print-agent-macos
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -32,12 +23,11 @@ jobs:
         run: npm install -g pkg
 
       - name: Build executable
-        run: |
-          pkg print-agent.js --targets node18-${{ matrix.os == 'windows-latest' && 'win-x64' || matrix.os == 'ubuntu-latest' && 'linux-x64' || 'macos-x64' }} --output ${{ matrix.artifact }}
+        run: pkg print-agent.js --targets node18-win-x64 --output print-agent.exe
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ matrix.artifact }}
+          files: print-agent.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
