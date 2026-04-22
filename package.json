@@ -1,0 +1,19 @@
+{
+  "name": "print-agent",
+  "version": "1.0.0",
+  "description": "Zebra Print Agent - 本地打印代理",
+  "main": "print-agent.js",
+  "bin": "print-agent.js",
+  "scripts": {
+    "build": "pkg print-agent.js --targets node18-win-x64 --output dist/print-agent.exe",
+    "build:all": "pkg print-agent.js --targets node18-win-x64,node18-linux-x64,node18-macos-x64 --output dist/"
+  },
+  "pkg": {
+    "assets": [],
+    "scripts": [],
+    "targets": ["node18-win-x64"]
+  },
+  "keywords": ["zebra", "print", "zpl", "label"],
+  "author": "",
+  "license": "MIT"
+}
