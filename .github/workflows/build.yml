@@ -4,8 +4,9 @@ on:
   push:
     tags:
       - 'v*'
-  release:
-    types: [created]
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -25,9 +26,7 @@ jobs:
       - name: Build executable
         run: pkg print-agent.js --targets node18-win-x64 --output print-agent.exe
 
-      - name: Upload Release Asset
+      - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: print-agent.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
